@@ -1,6 +1,9 @@
 # Getting started with Kafka
 
-Learn how Apache Kafka works and how you can use it to build applications that react to events as they happen. This tutorial will cover the basic of Apache Kafka. We will take a look at all the components of the Kafka platform, explaining key concepts as we go along. We will build a small stream processing pipeline using tools and samples included in Kafka.
+Learn how Apache Kafka works and how you can use it to build applications that react to events as they happen. This workshop demonstrates how Kafka can be used as a streaming platform. It covers the basics of Apache Kafka and takes a look at all the components of the Kafka platform, explaining key concepts as we go along.
+
+We will build a small stream processing pipeline using tools and samples included in Kafka.
+
 
 ## [Part 1](./part1/README.md)
 

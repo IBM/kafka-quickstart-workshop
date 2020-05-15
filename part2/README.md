@@ -4,7 +4,7 @@ In this part we will look at the most basics Kafka concepts.
 
 ## Creating a topic
 
-A topic is a category or feed name to which records are published. To create a topic we need 3 things:
+A topic is a category or feed name to which records are published. To create a topic we need 4 things:
 
 - Name: A topic is referred by its name. It has to be unique within a cluster and must use alphanumerics plus a few symbols (`.`, `_` and `-`).
 
@@ -12,11 +12,13 @@ A topic is a category or feed name to which records are published. To create a t
 
 - Replication factor: This specifies how many copies of the data are kept in the cluster. Let's set that to `3` for now.
 
+- Configurations: Some configurations can be applied by topic. If not specified, the broker defaults apply.
+
 
 Let's create our first topic:
 
 ```sh
-> bin/kafka-topics.sh --bootstrap-server $BOOTSTRAP_SERVERS --command-config $CONFIG_FILE --create --replication-factor 3 --partitions 1 --topic my-first-topic
+> bin/kafka-topics.sh --bootstrap-server $BOOTSTRAP_SERVERS --command-config $CONFIG_FILE --create --replication-factor 3 --partitions 2 --topic my-first-topic
 Created topic my-first-topic.
 ```
 
@@ -61,14 +63,15 @@ When creating our topic, we used `3` as the replication factor. Event Streams re
 Let's describe our topic, to see the details about its replicas:
 
 ```sh
-> bin/kafka-topics.sh --bootstrap-server <BOOTSTRAP_SERVERS> --command-config <CONFIG_FILE> --topic my-first-topic --describe
-Topic:my-first-topic   PartitionCount:1    ReplicationFactor:3 Configs:
-    Topic: my-first-topic  Partition: 0    Leader: 1   Replicas: 1,2,0 Isr: 1,2,0
+> bin/kafka-topics.sh --bootstrap-server $BOOTSTRAP_SERVERS --command-config $CONFIG_FILE --describe --topic my-first-topic
+Topic: my-first-topic	PartitionCount: 2	ReplicationFactor: 3	Configs: min.insync.replicas=2,segment.bytes=536870912,retention.ms=86400000,retention.bytes=1073741824
+	Topic: my-first-topic	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3
+	Topic: my-first-topic	Partition: 1	Leader: 2	Replicas: 2,3,4	Isr: 2,3,4
 ```
 
 Here is an explanation of output:
 
-The first line gives a summary of the topic. Additional line gives information about each partition. Since we have only one partition for this topic there is only one line. We also did not specify any configuration hence there's nothing after `Configs`.
+The first line gives a summary of the topic. Additional line gives information about each partition as well as the topic configurations, that are the defaults as we did not specify any when creating the topic.
 
 - `Leader` is the broker responsible for reads and writes for the given partition. Each broker will be the leader for a randomly selected portion of the partitions.
 - `Replicas` is the list of brokers that replicate the log for this partition regardless of whether they are the leader or even if they are currently online.
@@ -76,4 +79,62 @@ The first line gives a summary of the topic. Additional line gives information a
 
 ## Consumer groups
 
+A Consumer groups is a collection of consumers that cooperate to consume a set of topics. Kafka guarantees that within a group, each partition will be consumed by a single consumer.
+
+When we run the console consumer above, it consumed both partitions of our topic. If we started another instance, both would see all messages. We can configure the console consumer to use a Consumer Group using the `--group` flag. Let's restart a consmer with a group:
+
+```
+> bin/kafka-console-consumer.sh --bootstrap-server $BOOTSTRAP_SERVERS --consumer.config $CONFIG_FILE --topic my-first-topic --from-beginning --group my-group
+```
+
+Now let's use the `kafka-consumer-groups.sh` tool to check the state of our group:
+```sh
+> bin/kafka-consumer-groups.sh --bootstrap-server $BOOSTRAP_SERVERS --command-config $CONFIG_FILE --describe --group my-group
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                              HOST            CLIENT-ID
+my-group        my-first-topic  0          1               1               0               consumer-my-group-1-a139ff8b-4e7d-40e4-8c81-660b629913d5 /169.254.0.3    consumer-my-group-1
+my-group        my-first-topic  1          0               0               0               consumer-my-group-1-a139ff8b-4e7d-40e4-8c81-660b629913d5 /169.254.0.3    consumer-my-group-1
+```
+
+We can see we have a single consumer that is consuming from both partition of our topic.
+
+Let's now start a second consumer using the same group. In another window, run:
+```sh
+> bin/kafka-console-consumer.sh --bootstrap-server $BOOTSTRAP_SERVERS --consumer.config $CONFIG_FILE --topic my-first-topic --from-beginning --group my-group
+```
+
+If we describe our group again, we now see:
+```sh
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                              HOST            CLIENT-ID
+my-group        my-first-topic  0          1               1               0               consumer-my-group-1-287eb22f-a2e2-4a8d-9c22-b120622bf885 /169.254.0.3    consumer-my-group-1
+my-group        my-first-topic  1          0               0               0               consumer-my-group-1-a139ff8b-4e7d-40e4-8c81-660b629913d5 /169.254.0.3    consumer-my-group-1
+```
+
+Our consumers have split the partitions between them. If we start a third consumer, it will not consumer from any partitions and with act as a hot standby in case one of the other consumers crashes.
+
+[TODO OFFSETS]
+
+
 ## Delivery Semantics
+
+[TODO ACKS]
+
+## Data Retention
+
+One main caracteristic of Kafka is that messages are not deleted once consumed but instead they are persisted. This allows data to be consumed by many consumers and also enables consumers to reprocess data if needed.
+
+As storage is not unlimited, retention limits can be specified to determine when to delete records. Because we did not specify configurations when we created our topic, default values were applied. Let's describe our topic again to check what these are:
+
+```sh
+> bin/kafka-topics.sh --bootstrap-server $BOOTSTRAP_SERVERS --command-config $CONFIG_FILE --describe --topic my-first-topic
+Topic: my-first-topic	PartitionCount: 2	ReplicationFactor: 3	Configs: min.insync.replicas=2,segment.bytes=536870912,retention.ms=86400000,retention.bytes=1073741824
+	Topic: my-first-topic	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3
+	Topic: my-first-topic	Partition: 1	Leader: 2	Replicas: 2,3,4	Isr: 2,3,4
+```
+
+There is:
+
+- [`retention.ms`](http://kafka.apache.org/documentation/#retention.ms): This specifies the guaranteed minimum amount of time data is kept in Kafka. 
+
+- [`retention.bytes`](http://kafka.apache.org/documentation/#retention.bytes): This specifies the guaranteed minimum size of data for each partition kept in Kafka per partition
+
+Whichever of these limits is reached first will trigger the deletion.

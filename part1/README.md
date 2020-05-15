@@ -14,6 +14,13 @@ Kafka is made of the following components:
 
 ![Kafka Platform](./kafka-platform.png)
 
+## Workshop objectives
+
+In this workshop we will build a small event streaming pipeline using the tools and samples built-in Apache Kafka.
+
+![Workshop pipeline](./pipeline.png)
+
+Our input data comes from a file. Kafka Connect streams it into a topic in Kafka. Finally Kafka Streams processes the data and writes the output into a new topic.
 
 ## Prerequisites
 
