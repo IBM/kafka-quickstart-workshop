@@ -46,7 +46,7 @@ To retrieve your Event Streams credentials, navigate to the instance in IBM Clou
 1) The configuration file
 
 Create a new file that contains the following:
-```
+```properties
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="token" password="<APIKEY>";
 security.protocol=SASL_SSL
 sasl.mechanism=PLAIN
