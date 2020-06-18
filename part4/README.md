@@ -1,6 +1,6 @@
 # Part 4
 
-In this part we will learn about Kafka Streams and how it can be used to process streams of data in real time.
+In this part we will learn about Kafka Streams and how it can be used to process streams of data in real time. This follows on from [Part 3](../part3/README.md).
 
 ## Kafka Streams
 

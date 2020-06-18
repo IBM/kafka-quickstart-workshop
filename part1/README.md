@@ -2,7 +2,7 @@
 
 ## Kafka overview
 
-Apache Kafka is a distributed streaming platform. It provides publish-subscribe APIs and can store and process streams of records at large scale.
+[Apache Kafka](https://kafka.apache.org) is a distributed streaming platform. It provides publish-subscribe APIs and can store and process streams of records at large scale.
 
 Kafka is made of the following components:
 - Cluster: One of more Kafka servers 
@@ -33,7 +33,7 @@ tar -xzf kafka_2.13-2.5.0.tgz
 cd kafka_2.13-2.5.0
 ```
 
-For the server side, we will use IBM Event Streams. This workshop requires creating several topics so it will incur a fee.
+For the server side, we will use [IBM Event Streams](https://www.ibm.com/cloud/event-streams). This workshop requires creating several topics so it will incur a fee.
 
 This workshop assumes you are running a Unix based platform like macOS or Linux. If you are on Windows, use the scripts that are in the `bin/windows` directory.
 
@@ -41,7 +41,7 @@ This workshop assumes you are running a Unix based platform like macOS or Linux.
 
 The first step is to configure the Kafka command line tools to be able to connect to our Kafka cluster. 
 
-To retrieve your Event Streams credentials, navigate to the instance in IBM Cloud. Click on the Service Credentials tab and select New Credentials. Then click on View Credentials. This panel contains all the information required to connect to your Event Streams instance.
+To retrieve your Event Streams credentials, navigate to the instance in IBM Cloud. Click on the **Service Credentials** tab and select **New Credentials**. Then click on **View Credentials**. This panel contains all the information required to connect to your Event Streams instance.
 
 1) The configuration file
 
@@ -78,3 +78,7 @@ Set:
 ```sh
 export BOOTSTRAP_SERVERS="broker-2-<...>.eventstreams.cloud.ibm.com:9093,broker-0-<...>.eventstreams.cloud.ibm.com:9093,broker-1-<...>.eventstreams.cloud.ibm.com:9093"
 ```
+
+## Next Steps
+
+Continue to [part 2](../part2/README.md)

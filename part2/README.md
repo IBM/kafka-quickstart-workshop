@@ -1,21 +1,21 @@
 # Part 2
 
-In this part we will look at the most basics Kafka concepts.
+In this part we will look at the most basics Kafka concepts. This follows on from [Part 1](../part1/README.md).
 
 ## Creating a topic
 
-A topic is a category or feed name to which records are published. To create a topic we need 4 things:
+A **topic** is a category or feed name to which records are published. To create a topic we need 4 things:
 
-- Name: A topic is referred by its name. It has to be unique within a cluster and must use alphanumerics plus a few symbols (`.`, `_` and `-`).
+- **Name:** A topic is referred by its name. It has to be unique within a cluster and must use alphanumerics plus a few symbols (`.`, `_` and `-`).
 
-- Partition count: Partitions are the units of scalability. Having multiple partitions allows distributing a topic across several brokers. However, Kafka only guarantees ordering within a partition.
+- **Partition count:** Partitions are the units of scalability. Having multiple partitions allows distributing a topic across several brokers. However, Kafka only guarantees ordering within a partition.
 
-- Replication factor: This specifies how many copies of the data are kept in the cluster. Let's set that to `3` for now.
+- **Replication factor:** This specifies how many copies of the data are kept in the cluster. This value should not exceed the number of Kafka servers in the cluster. Let's set that to `3` for now.
 
-- Configurations: Some configurations can be applied by topic. If not specified, the broker defaults apply.
+- **Configurations:** Some configurations can be applied by topic. If not specified, the broker defaults apply.
 
 
-Let's create our first topic:
+Let's create our first topic. In a terminal navigate to the Kafka directory downloaded in the [pre-reqs](../part1/README.md) and then run the following:
 
 ```sh
 > bin/kafka-topics.sh --bootstrap-server $BOOTSTRAP_SERVERS \
@@ -32,7 +32,7 @@ my-first-topic
 
 ## Sending some messages
 
-Kafka comes with a command line Producer that will take data from a file or from standard input and send it out as messages to the Kafka cluster. By default, each line will be sent as a separate message.
+Kafka comes with a command line **producer** that will take data from a file or from standard input and send it out as messages to the Kafka cluster. By default, each line will be sent as a separate message.
 
 Run the producer and then type a few messages into the console to send to the server.
 
@@ -45,7 +45,7 @@ This is another message
 
 ## Consuming some messages
 
-Kafka also has a command line Consumer that will print messages to standard output.
+Kafka also has a command line **consumer** that will print messages to standard output.
 
 ```sh
 > bin/kafka-console-consumer.sh --bootstrap-server $BOOTSTRAP_SERVERS \
@@ -54,7 +54,7 @@ This is a message
 This is another message
 ```
 
-Here we used the `--from-beginning` flag. Otherwise, by default, the Consumer starts consuming at the end of topics and only receives new messages.
+Here we used the `--from-beginning` flag. Otherwise, by default, the consumer starts consuming at the end of topics and only receives new messages.
 
 If you have each of the above commands running in a different terminal then you should now be able to type messages into the producer terminal and see them appear in the consumer terminal.
 
@@ -76,15 +76,15 @@ Topic: my-first-topic	PartitionCount: 2	ReplicationFactor: 3	Configs: min.insync
 
 Here is an explanation of output:
 
-The first line gives a summary of the topic. Additional line gives information about each partition as well as the topic configurations, that are the defaults as we did not specify any when creating the topic.
+The first line gives a summary of the topic. Additional lines gives information about each partition as well as the topic configurations, that are the defaults as we did not specify any when creating the topic.
 
-- `Leader` is the broker responsible for reads and writes for the given partition. Each broker will be the leader for a randomly selected portion of the partitions.
-- `Replicas` is the list of brokers that replicate the log for this partition regardless of whether they are the leader or even if they are currently online.
-- `Isr` is the set of "In-Sync Replicas". This is the subset of the replicas list that is currently online and caught-up to the leader.
+- **Leader** is the broker responsible for reads and writes for the given partition. Each broker will be the leader for a randomly selected portion of the partitions.
+- **Replicas** is the list of brokers that replicate the log for this partition regardless of whether they are the leader or even if they are currently online.
+- **Isr** is the set of **In-Sync Replicas**. This is the subset of the replicas list that is currently online and caught-up to the leader.
 
 ## Consumer groups
 
-A Consumer groups is a collection of consumers that cooperate to consume a set of topics. Kafka guarantees that within a group, each partition will be consumed by a single consumer.
+A **consumer group** is a collection of consumers that cooperate to consume a set of topics. Kafka guarantees that within a group, each partition of a topic will be consumed by a single consumer.
 
 When we run the console consumer above, it consumed both partitions of our topic. If we started another instance, both would see all messages. We can configure the console consumer to use a Consumer Group using the `--group` flag. Let's restart a consmer with a group:
 
@@ -128,7 +128,7 @@ Our consumers have split the partitions between them. If we start a third consum
 
 ## Data Retention
 
-One main caracteristic of Kafka is that messages are not deleted once consumed but instead they are persisted. This allows data to be consumed by many consumers and also enables consumers to reprocess data if needed.
+One main characteristic of Kafka is that messages are not deleted once consumed but instead they are persisted. This allows data to be consumed by many consumers and also enables consumers to reprocess data if needed.
 
 As storage is not unlimited, retention limits can be specified to determine when to delete records. Because we did not specify configurations when we created our topic, default values were applied. Let's describe our topic again to check what these are:
 
@@ -147,3 +147,7 @@ There is:
 - [`retention.bytes`](http://kafka.apache.org/documentation/#retention.bytes): This specifies the guaranteed minimum size of data for each partition kept in Kafka per partition
 
 Whichever of these limits is reached first will trigger the deletion.
+
+## Next Steps
+
+Continue to [part 3](../part3/README.md)
