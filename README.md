@@ -2,8 +2,14 @@
 
 Learn how Apache Kafka works and how you can use it to build applications that react to events as they happen. This workshop demonstrates how Kafka can be used as a streaming platform. It covers the basics of Apache Kafka and takes a look at all the components of the Kafka platform, explaining key concepts as we go along.
 
-We will build a small stream processing pipeline using tools and samples included in Kafka.
 
+## Workshop objectives
+
+In this workshop we will build a small event streaming pipeline using the tools and samples built-in Apache Kafka.
+
+![Workshop pipeline](./pipeline.png)
+
+Our input data comes from a file. Kafka Connect streams it into a topic in Kafka. Finally Kafka Streams processes the data and writes the output into a new topic.
 
 ## [Part 1](./part1/README.md)
 

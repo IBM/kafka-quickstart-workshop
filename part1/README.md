@@ -14,13 +14,6 @@ Kafka is made of the following components:
 
 ![Kafka Platform](./kafka-platform.png)
 
-## Workshop objectives
-
-In this workshop we will build a small event streaming pipeline using the tools and samples built-in Apache Kafka.
-
-![Workshop pipeline](./pipeline.png)
-
-Our input data comes from a file. Kafka Connect streams it into a topic in Kafka. Finally Kafka Streams processes the data and writes the output into a new topic.
 
 ## Prerequisites
 
@@ -47,14 +40,17 @@ To retrieve your Event Streams credentials, navigate to the instance in IBM Clou
 
 Create a new file that contains the following:
 ```properties
+bootstrap.servers=<BOOTSTRAP_SERVERS>
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="token" password="<APIKEY>";
 security.protocol=SASL_SSL
 sasl.mechanism=PLAIN
 ssl.protocol=TLSv1.2
 ssl.enabled.protocols=TLSv1.2
 ssl.endpoint.identification.algorithm=HTTPS
+replication.factor=3
 ```
 Replace `<APIKEY>` by the value of the `apikey` field in your Service Credentials.
+Replace `BOOTSTRAP_SERVERS` by the values of the `kafka_brokers_sasl` field in your Service Credentials, separated by commas.
 
 Set an environment variable, `CONFIG_FILE`, pointing to the location of this file. For example:
 ```sh

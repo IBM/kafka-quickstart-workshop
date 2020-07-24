@@ -142,9 +142,9 @@ Topic: my-first-topic	PartitionCount: 2	ReplicationFactor: 3	Configs: min.insync
 
 There is:
 
-- [`retention.ms`](http://kafka.apache.org/documentation/#retention.ms): This specifies the guaranteed minimum amount of time data is kept in Kafka. 
+- [`retention.ms`](https://kafka.apache.org/documentation/#retention.ms): This specifies the guaranteed minimum amount of time data is kept in Kafka. 
 
-- [`retention.bytes`](http://kafka.apache.org/documentation/#retention.bytes): This specifies the guaranteed minimum size of data for each partition kept in Kafka per partition
+- [`retention.bytes`](https://kafka.apache.org/documentation/#retention.bytes): This specifies the guaranteed minimum size of data for each partition kept in Kafka per partition
 
 Whichever of these limits is reached first will trigger the deletion.
 
