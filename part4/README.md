@@ -6,6 +6,25 @@ In this part we will learn about Kafka Streams and how it can be used to process
 
 [Kafka Streams](https://kafka.apache.org/documentation/streams/) is a client library for building applications and microservices, where the input and output data are stored in Kafka clusters. It combines the simplicity of writing and deploying standard Java and Scala applications on the client side with the benefits of Kafka's server-side cluster technology.
 
+## Streams APIs
+
+Streams exposes 2 APIs:
+
+- DSL: This Domain Specific Language API makes it easy to express processing operations in just a few lines of code. It is designed to allow most common use cases making it especially great to get started.
+
+- Processor: This API is lower level than DSL. It gives developers full control and allows defining custom processors and accessing data stores.
+
+Streams performs 1 record at a time processing operations enabling to do near real-time processing of data. It also offers exactly-once processing semantics to ensure processing result are correct even in case of failure from the Kafka cluster of Streams itself.
+
+## Streams Operations
+
+There are 2 types of processing operations:
+
+- Stateless: These transformations don't require Streams to keep state to be performed. Stateless operations include: filtering, branching, switching between KStreams and KTable abstractions, etc.
+
+- Stateful: These operations require Streams to maintain state in order to be performed. These include: joining, aggregating aand windowing.
+
+A Streams application is a combination of processing operations linked together to accomplish a task. The logical flow of data is called a topology.
 
 ## WordCountDemo sample application
 
@@ -26,7 +45,7 @@ We start `WordCountDemo` passing our configuration file.
 
 The Streams application will run until interrupted, for example by pressing `CTRL+C`.
 
-## Check the result
+## Checking the result
 
 By default, `WordCountDemo` writes its output in the `streams-wordcount-output` topic. We can use a consumer to check the result:
 ```sh
@@ -40,3 +59,47 @@ By default, `WordCountDemo` writes its output in the `streams-wordcount-output` 
   --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
   --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
 ```
+
+While the Streams application is running, we can keep adding lines to our file and see new counts being emitted. 
+
+```sh
+> echo "another line" >> /tmp/file-source.txt
+```
+
+We can also use a producer to directly write records into the input topic:
+
+```sh
+> bin/kafka-console-producer.sh --bootstrap-server $BOOTSTRAP_SERVERS \
+  --producer.config $CONFIG_FILE --topic streams-plaintext-input
+line from the producer
+```
+
+## Looking at the code
+
+This sample is implemented with the DSL API. The core of the logic lies in the following few lines of codes:
+
+```java
+final KStream<String, String> source = builder.stream(INPUT_TOPIC);
+
+final KTable<String, Long> counts = source
+    .flatMapValues(value -> Arrays.asList(value.toLowerCase(Locale.getDefault()).split(" ")))
+    .groupBy((key, value) -> value)
+    .count();
+
+counts.toStream().to(OUTPUT_TOPIC, Produced.with(Serdes.String(), Serdes.Long()));
+```
+
+The first line defines the input stream. In this case, it is taking records from our input topic `streams-plaintext-input` and giving us a [KStream](http://kafka.apache.org/25/javadoc/org/apache/kafka/streams/kstream/KStream.html) instance. 
+
+The middle line performs the processing operations:
+ - first for each record (which is a line in our input file), it is split by spaces to retrieve all the words
+ - then words are grouped together by word
+ - `count()` is applied to count how many times each word appear and emit a record `(word, count)` per word.
+
+The last line defines the output stream. Here we are sending it to our output topic `streams-wordcount-output` and we have to specify a serializer for both the key (words) and the value (current count).
+
+The same logic is also implemented using the Processor API, see [WordCountProcessorDemo.java](https://github.com/apache/kafka/blob/trunk/streams/examples/src/main/java/org/apache/kafka/streams/examples/wordcount/WordCountProcessorDemo.java)
+
+## Next Steps
+
+Continue to [workshop summary](../part4/summary.md)

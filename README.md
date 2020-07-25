@@ -25,4 +25,4 @@ The third part explains how existing systems can be connected to Kafka using Kaf
 
 ## [Part 4](./part4/README.md)
 
-The fourth part introduces Kafka Streams.
+The fourth part introduces Kafka Streams and explains its data processing capabilities. It explores the `WordCountDemo` sample application by running it and detailing its processing logic.
