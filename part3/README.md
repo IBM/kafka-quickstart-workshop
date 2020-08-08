@@ -18,7 +18,9 @@ To keep things simple, we will use one of the built-in connector: [`FileStreamSo
 
 ## Starting the Connect runtime
 
-In distributed mode, the first step is to start the Connect runtime. We need to create a properties file with the correct details to configure Connect and enable the runtime to connect to our Event Streams instance.
+<TODO> DIffrent config for local kafka
+
+In distributed mode, the first step is to start the Connect runtime. We need to create a properties file with the correct details to configure Connect and enable the runtime to connect to our Kafka cluster.
 
 Create a file with the following contents, replacing the `<BOOTSTRAP_SERVERS>` and `<API_KEY>` tags with your cluster credentials.
 ```properties
@@ -98,8 +100,8 @@ This instructs the runtime to start the `FileStreamSourceConnector` connector an
 To enable our connector to work, we need to create the `streams-plaintext-input` topic.
 
 ```sh
-> bin/kafka-topics.sh --bootstrap-server $BOOTSTRAP_SERVERS \
-  --command-config $CONFIG_FILE --create --replication-factor 3 --partitions 1 --topic streams-plaintext-input
+> bin/kafka-topics.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
+  --command-config ${CONFIG_FILE} --create --replication-factor 3 --partitions 1 --topic streams-plaintext-input
 Created topic streams-plaintext-input.
 ```
 
@@ -133,8 +135,8 @@ Now that the connector is running, any line in `/tmp/file-source.txt` should end
 
 Start a consumer on `streams-plaintext-input`:
 ```sh
-./bin/kafka-console-consumer.sh --bootstrap-server $BOOTSTRAP_SERVERS \
-  --consumer.config $CONFIG_FILE --topic  streams-plaintext-input --from-beginning
+./bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
+  --consumer.config ${CONFIG_FILE} --topic  streams-plaintext-input --from-beginning
 ```
 
 While the consumer is running, we can add more line to our file and they should be consumed immediately.
@@ -160,7 +162,7 @@ IBM provides the following connectors:
 - [MQ Source](https://github.com/ibm-messaging/kafka-connect-mq-source)
 - [Cloud Object Storage Sink](https://github.com/ibm-messaging/kafka-connect-ibmcos-sink)
 
-We also provide a docker image with a Kubernetes YAML file to easily deploy Kafka Connect in IKS in the [Event Streams samples repository](https://github.com/ibm-messaging/event-streams-samples/tree/master/kafka-connect).
+We also provide a docker image with a Kubernetes YAML file to easily deploy Kafka Connect in [IBM Kubernetes Service](https://www.ibm.com/cloud/container-service/) in the [Event Streams samples repository](https://github.com/ibm-messaging/event-streams-samples/tree/master/kafka-connect).
 
 ## Next Steps
 

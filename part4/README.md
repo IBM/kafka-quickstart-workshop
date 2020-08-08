@@ -40,7 +40,7 @@ Let's use `WordCountDemo` to count word in our topic `streams-plaintext-input`.
 We start `WordCountDemo` passing our configuration file.
 
 ```sh
-> bin/kafka-run-class.sh org.apache.kafka.streams.examples.wordcount.WordCountDemo $CONFIG_FILE
+> bin/kafka-run-class.sh org.apache.kafka.streams.examples.wordcount.WordCountDemo ${CONFIG_FILE}
 ```
 
 The Streams application will run until interrupted, for example by pressing `CTRL+C`.
@@ -49,8 +49,8 @@ The Streams application will run until interrupted, for example by pressing `CTR
 
 By default, `WordCountDemo` writes its output in the `streams-wordcount-output` topic. We can use a consumer to check the result:
 ```sh
-> bin/kafka-console-consumer.sh --bootstrap-server $BOOTSTRAP_SERVERS \
-  --consumer.config $CONFIG_FILE \
+> bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
+  --consumer.config ${CONFIG_FILE} \
   --topic streams-wordcount-output \
   --from-beginning \
   --formatter kafka.tools.DefaultMessageFormatter \
@@ -69,8 +69,8 @@ While the Streams application is running, we can keep adding lines to our file a
 We can also use a producer to directly write records into the input topic:
 
 ```sh
-> bin/kafka-console-producer.sh --bootstrap-server $BOOTSTRAP_SERVERS \
-  --producer.config $CONFIG_FILE --topic streams-plaintext-input
+> bin/kafka-console-producer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
+  --producer.config ${CONFIG_FILE} --topic streams-plaintext-input
 line from the producer
 ```
 
