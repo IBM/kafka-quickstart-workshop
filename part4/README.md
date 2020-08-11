@@ -34,6 +34,42 @@ This sample application consumes an input topic, count how many times words appe
 
 Let's use `WordCountDemo` to count word in our topic `streams-plaintext-input`.
 
+### Updating WordCountDemo
+
+Unfortunately, `WordCountDemo` is not currently configurable so we will need to make a few small code changes. In a text editor, open `streams/examples/src/main/java/org/apache/kafka/streams/examples/wordcount/WordCountDemo.java`:
+
+- Replace line 78 by `final Properties props = getStreamsConfig(args);`
+- Replace the `getStreamsConfig()` method from line 50 to 63 by the following block:
+
+```java
+static Properties getStreamsConfig(final String[] args) throws IOException {
+    final Properties props = new Properties();
+    if (args != null && args.length > 0) {
+        try (final FileInputStream fis = new FileInputStream(args[0])) {
+            props.load(fis);
+        }
+        if (args.length > 1) {
+            System.out.println("Warning: Some command line arguments were ignored. This demo only accepts an optional configuration file.");
+        }
+    }
+    props.putIfAbsent(StreamsConfig.APPLICATION_ID_CONFIG, "streams-wordcount");
+    props.putIfAbsent(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    props.putIfAbsent(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
+    props.putIfAbsent(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+    props.putIfAbsent(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+
+    // setting offset reset to earliest so that we can re-run the demo code with the same pre-loaded data
+    // Note: To re-run the demo, you need to use the offset reset tool:
+    // https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Streams+Application+Reset+Tool
+    props.putIfAbsent(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    return props;
+}
+```
+
+Once done, we need to recompile it. We can do that by running:
+```sh
+./gradlew assemble
+```
 
 ## Running WordCountDemo
 

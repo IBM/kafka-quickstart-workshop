@@ -1,28 +1,67 @@
 # Local Kafka Setup
 
-## Running a local Kafka cluster
+This page details how to setup a 3 broker Kafka cluster on a single machine. This environment is not suitable for production but it provides all the features necessary to complete this workshop. 
 
-<TODO> steps for starting a kafka cluster locally
+## Starting ZooKeeper
 
-1) Starting ZooKeeper
+The first step is to get ZooKeeper running. This is necessary in order to start Kafka:
 
+We can start ZooKeeper with the default configuration file, by running:
 ```sh
 ./bin/zookeeper-server-start.sh ./config/zookeeper.properties
 ```
 
-2) Starting 3 Kafka brokers
+We have now started a ZooKeeper ensemble consisting of a single server. Again this is not suitable for production bbut this is enough to start a Kafka cluster.
+
+## Configuring a local Kafka cluster
+
+Kafka provides a default Kafka configuration file, `config/server.properties`. We will reuse this file and make a few changes.
+
+### 1. Make 3 copies of `config/server.properties`:
+  - `config/server0.properties`
+  - `config/server1.properties`
+  - `config/server2.properties`
+
+### 2. In all 3 files:
+  - Replace lines 74 to 76 by:
+  ```properties
+  offsets.topic.replication.factor=3
+  transaction.state.log.replication.factor=3
+  transaction.state.log.min.isr=3
+  ```
+
+### 3. In each file:
+  - Replace line 21 by `broker.id=<BROKER_ID>`
+  - Replace line 31 by `listeners=PLAINTEXT://:9<BROKER_ID>92`
+  - Replace line 60 by `log.dirs=/tmp/kafka<BROKER_ID>-logs`
+
+where `<BROKER_ID>` is the number in the file name, for example `2` for `config/server2.properties`
+
+For example, in `config/server2.properties`:
+  - `broker.id=2`
+  - `listeners=PLAINTEXT://:9292`
+  - `log.dirs=/tmp/kafka2-logs`  
+
+## Starting the Kafka cluster
+
+Now that we have all the required configurations, let's start our brokers:
 
 ```sh
-./bin/kafka-server-start.sh ./config/server.properties
+./bin/kafka-server-start.sh ./config/server0.properties
 ```
+
+Then in a different terminal window, run:
 
 ```sh
 ./bin/kafka-server-start.sh ./config/server1.properties
 ```
 
+Finally in a different terminal window, run:
 ```sh
 ./bin/kafka-server-start.sh ./config/server2.properties
 ```
+
+Congratulations, we've now started our Kafka cluster!
 
 ## Configuring the command line tools
 

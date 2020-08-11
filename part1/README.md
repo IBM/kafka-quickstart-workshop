@@ -17,13 +17,22 @@ Kafka is made of the following components:
 
 ## Prerequisites
 
+In order to complete this workshop, we need to have the following dependencies installed:
+
+- [Java SDK](https://openjdk.java.net/install/). Version 8 or above
+- [gradle](https://gradle.org/install/). Version 6 or above
+
+## Getting Apache Kafka
+
 In this workshop, we will use the Kafka command line tools.
 
-[Download](http://kafka.apache.org/downloads) the latest binary package from the [Apache Kafka website](http://kafka.apache.org/) and uncompress it. For example, for Kafka 2.6.0:
+As we will need to edit a sample in [Part 4](../part4/README.md), let's [download](http://kafka.apache.org/downloads) the latest source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it and compile it. For example, for Kafka 2.6.0:
 
 ```sh
-tar -xzf kafka_2.13-2.6.0.tgz
-cd kafka_2.13-2.6.0
+tar -xzf kafka-2.6.0-src.tgz
+cd kafka-2.6.0-src
+gradle
+./gradlew assemble   # This command takes a few minutes to complete
 ```
 
 This workshop assumes you are running a Unix based platform like macOS or Linux and will use the scripts from the `bin` directory in the examples. If you are on Windows, use the scripts that are in the `bin/windows` directory.
@@ -39,4 +48,4 @@ This workshop requires access to a Kafka cluster. If you don't already have a Ka
 
 ## Next Steps
 
-Continue to [part 2](../part2/README.md)
+Continue to [Part 2](../part2/README.md)

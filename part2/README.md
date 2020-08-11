@@ -148,4 +148,4 @@ Whichever of these limits is reached first will trigger deletion records.
 
 ## Next Steps
 
-Continue to [part 3](../part3/README.md)
+Continue to [Part 3](../part3/README.md)
