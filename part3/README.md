@@ -1,20 +1,20 @@
-# Part 3
+# Part 3 - Integrating data with Kafka Connect
 
-In this part we will look at Kafka Connect and how to stream data between external systems and Kafka. This follows on from [Part 2](../part2/README.md).
+In this part, we will look at Kafka Connect and how to stream data between external systems and Kafka. This follows on from [Part 2](../part2/README.md).
 
 ## Kafka Connect
 
 [Kafka Connect](https://kafka.apache.org/documentation/#connect) is a tool for scalably and reliably streaming data between Apache Kafka and other systems. It makes it simple to quickly define connectors that move large collections of data into and out of Kafka. It provides a framework to build connectors and manage them via a [REST API](https://kafka.apache.org/documentation/#connect_rest).
 
-It can run in 2 modes:
+Kafka Connect can run in 2 modes:
 - **Standalone:** This mode is for development and runs in a single process.
-- **Distributed:** This mode is suitable for production environment as it allows to scale dynamically and provide fault tolerance.
+- **Distributed:** This mode is suitable for production environments as it allows scaling dynamically and provides fault tolerance.
 
 In this workshop, we will setup Connect using the distributed mode.
 
 ## Importing data into Kafka from a file
 
-To keep things simple, we will use one of the built-in connector: [`FileStreamSourceConnector`](https://github.com/apache/kafka/blob/trunk/connect/file/src/main/java/org/apache/kafka/connect/file/FileStreamSourceConnector.java). This connector imports data from a file into Kafka. The process to get a connector up and running is very similar for all connectors so it's a great way to get started and learn about Kafka Connect.
+To keep things simple, we will use one of the built-in connectors: [`FileStreamSourceConnector`](https://github.com/apache/kafka/blob/trunk/connect/file/src/main/java/org/apache/kafka/connect/file/FileStreamSourceConnector.java). This connector imports data from a file into Kafka. The process to get a connector up and running is very similar for all connectors so it's a great way to get started and learn about Kafka Connect.
 
 ## Starting the Connect runtime
 
@@ -24,25 +24,25 @@ In order to configure Kafka Connect, follow the steps for your Kafka environment
 - For [Event Streams](./event-streams.md)
 - For [Local Kafka](./local-kafka.md)
 
-By default, the runtime will use port `8083`. You can change this port by setting `rest.port=<PORT>`. The rest of this part uses `8083`.
+By default, the runtime exposes its REST API on port `8083`. You can change this port by setting `rest.port=<PORT>`. The rest of the workshop assumes the port is `8083`.
 
-Let's start the runtime. The following command starts the Connect runtime locally:
+Let's start the Connect runtime using the following command:
 ```sh
 ./bin/connect-distributed.sh ./config/connect-distributed.properties
 ```
 
-We can validate the runtime is correctly started by using its REST API. The following command returns the listed of available connectors:
+We can validate the Connect runtime is correctly started by using its REST API. The following command returns the listed of available connectors:
 ```sh
 curl http://localhost:8083/connector-plugins
 ```
 
-Ensure it contains `org.apache.kafka.connect.file.FileStreamSourceConnector`.
+Ensure it contains at least `org.apache.kafka.connect.file.FileStreamSourceConnector`.
 
 ## Configuring the connector
 
-Now that the runtime is running, we are now able to start connectors via the REST API.
+Now that the runtime is running, we are able to start connectors via the REST API.
 
-In order to start the connector, we need some configuration. Create a file, with the following content:
+In order to start the connector, we need some configurations. Create a file, with the following content:
 ```json
 {
   "name": "file-source",
@@ -55,7 +55,7 @@ In order to start the connector, we need some configuration. Create a file, with
 }
 ```
 
-This instructs the runtime to start the `FileStreamSourceConnector` connector and make it read a file called `/tmp/file-source.txt`. It should send each line of this file as a message to the `streams-plaintext-input` topic. Finally `tasks.max` allows to configure how many tasks Connect should start, just 1 in our scenario.
+This instructs the runtime to start the `FileStreamSourceConnector` connector and make it read a file called `/tmp/file-source.txt`. It will send each line of this file as a message to the `streams-plaintext-input` topic. Finally `tasks.max` allows to configure how many tasks Connect should start, just 1 in our scenario.
 
 ## Creating the topic
 
@@ -93,22 +93,22 @@ We can verify the connector is running:
 
 ## Testing the connector
 
-Now that the connector is running, any line in `/tmp/file-source.txt` should end up in our topic.
+Now that the connector is running, any line added to `/tmp/file-source.txt` will end up in our topic.
 
 Start a consumer on `streams-plaintext-input`:
 ```sh
 ./bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --consumer.config ${CONFIG_FILE} --topic  streams-plaintext-input --from-beginning
+  --consumer.config ${CONFIG_FILE} --topic streams-plaintext-input --from-beginning
 ```
 
-While the consumer is running, we can add more line to our file and they should be consumed immediately.
+While the consumer is running, we can add more lines to our file and they should be consumed immediately.
 ```sh
 > echo "adding more content" >> /tmp/file-source.txt
 ```
 
 ## Summary
 
-In just a few commands, we have demonstrated how to use the Kafka Connect framework. There is a wide ecosystem of connectors built by the community thats enable integrating most systems with Kafka without having to write any code. All connectors are managed the same way with the Connect REST API so everything learnt in this workshop is applicable to real deployments.
+In just a few commands, we have demonstrated how to use the Kafka Connect framework. There is a wide ecosystem of connectors built by the community that enable integrating many systems with Kafka without having to write any code. All connectors are managed the same way with the Connect REST API so everything learnt in this workshop is applicable to real deployments.
 
 ## Going further
 
@@ -124,7 +124,7 @@ IBM provides the following connectors:
 - [MQ Source](https://github.com/ibm-messaging/kafka-connect-mq-source)
 - [Cloud Object Storage Sink](https://github.com/ibm-messaging/kafka-connect-ibmcos-sink)
 
-We also provide a docker image with a Kubernetes YAML file to easily deploy Kafka Connect in [IBM Kubernetes Service](https://www.ibm.com/cloud/container-service/) in the [Event Streams samples repository](https://github.com/ibm-messaging/event-streams-samples/tree/master/kafka-connect).
+We also provide a Docker image with a Kubernetes YAML file to easily deploy Kafka Connect in [IBM Kubernetes Service](https://www.ibm.com/cloud/container-service/) in the [Event Streams samples repository](https://github.com/ibm-messaging/event-streams-samples/tree/master/kafka-connect).
 
 ## Next Steps
 

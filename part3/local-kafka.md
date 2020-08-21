@@ -25,3 +25,7 @@ config.storage.replication.factor=3
 status.storage.topic=connect_status
 status.storage.replication.factor=3
 ```
+
+## Back to Part 3
+
+Return to [Part 3](../part3/README.md)

@@ -11,7 +11,7 @@ We can start ZooKeeper with the default configuration file, by running:
 ./bin/zookeeper-server-start.sh ./config/zookeeper.properties
 ```
 
-We have now started a ZooKeeper ensemble consisting of a single server. Again this is not suitable for production bbut this is enough to start a Kafka cluster.
+We have now started a ZooKeeper ensemble consisting of a single server. Again this is not suitable for production but this is enough to start a Kafka cluster.
 
 ## Configuring a local Kafka cluster
 
@@ -29,8 +29,6 @@ Kafka provides a default Kafka configuration file, `config/server.properties`. W
   transaction.state.log.replication.factor=3
   transaction.state.log.min.isr=3
   ```
-
-### 3. In each file:
   - Replace line 21 by `broker.id=<BROKER_ID>`
   - Replace line 31 by `listeners=PLAINTEXT://:9<BROKER_ID>92`
   - Replace line 60 by `log.dirs=/tmp/kafka<BROKER_ID>-logs`
@@ -89,6 +87,6 @@ Set:
 export BOOTSTRAP_SERVERS="localhost:9092,localhost:9192,localhost:9292"
 ```
 
-## Next Steps
+## Back to Part 1
 
-Continue to [part 2](../part2/README.md)
+Return to [Part 1](../part1/README.md)

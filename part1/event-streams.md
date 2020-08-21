@@ -10,7 +10,7 @@ This workshop requires creating several topics so it will incur a fee.
 
 2. Select the [Event Streams service](https://cloud.ibm.com/catalog/event-streams) in the Catalog.
 
-3. Select the Standard plan on the service instance page.
+3. Select the Standard or Enterprise plan on the service instance page.
 
 4. Enter a name for your service. You can use the default value.
 
@@ -20,7 +20,7 @@ This workshop requires creating several topics so it will incur a fee.
 
 The next step is to configure the Kafka command line tools to be able to connect to our Kafka cluster. 
 
-To retrieve your Event Streams credentials, navigate to the instance in IBM Cloud. Click on the **Service Credentials** tab and select **New Credentials**. Then click on **View Credentials**. This panel contains all the information required to connect to your Event Streams instance.
+To retrieve your Event Streams credentials, navigate to the instance in [IBM Cloud](https://cloud.ibm.com/resources). Click on the **Service Credentials** tab and select **New Credentials**. Then click on **View Credentials**. This panel contains all the information required to connect to your Event Streams instance.
 
 1) The configuration file
 
@@ -45,7 +45,7 @@ export CONFIG_FILE="/tmp/client.properties"
 
 2) Bootstrap Servers
 
-In your credentials, take note of the `kafka_brokers_sasl` field, these are the bootstrap servers that are used to connect to the cluster. All commands will require the these values to be passed in the CSV format. 
+In your credentials, take note of the `kafka_brokers_sasl` field, these are the bootstrap servers that are used to connect to the cluster. Most commands will require these values to be passed in the CSV format. 
 
 Set an environment variable, `BOOTSTRAP_SERVERS`, listing all your brokers. For example, for:
 ```json
@@ -61,6 +61,6 @@ Set:
 export BOOTSTRAP_SERVERS="broker-2-<...>.eventstreams.cloud.ibm.com:9093,broker-0-<...>.eventstreams.cloud.ibm.com:9093,broker-1-<...>.eventstreams.cloud.ibm.com:9093"
 ```
 
-## Next Steps
+## Back to Part 1
 
-Continue to [part 2](../part2/README.md)
+Return to [Part 1](../part1/README.md)

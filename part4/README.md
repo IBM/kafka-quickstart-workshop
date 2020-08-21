@@ -1,22 +1,22 @@
-# Part 4
+# Part 4 - Processing data with Kafka Streams
 
-In this part we will learn about Kafka Streams and how it can be used to process streams of data in real time. This follows on from [Part 3](../part3/README.md).
+In this part, we will learn about Kafka Streams and how it can be used to process streams of data in real time. This follows on from [Part 3](../part3/README.md).
 
 ## Kafka Streams
 
-[Kafka Streams](https://kafka.apache.org/documentation/streams/) is a client library for building applications and microservices, where the input and output data are stored in Kafka clusters. It combines the simplicity of writing and deploying standard Java and Scala applications on the client side with the benefits of Kafka's server-side cluster technology.
+[Kafka Streams](https://kafka.apache.org/documentation/streams/) is a client library for building applications and microservices, where the input and output data are stored in Kafka. It combines the simplicity of writing and deploying standard Java and Scala applications on the client-side with the benefits of Kafka's server-side cluster technology.
 
 ## Streams APIs
 
 Streams exposes 2 APIs:
 
-- DSL: This Domain Specific Language API makes it easy to express processing operations in just a few lines of code. It is designed to allow most common use cases making it especially great to get started.
+- DSL: This Domain Specific Language API makes it easy to express processing operations in just a few lines of code. It is designed to allow most common use cases, making it especially great to get started.
 
 - Processor: This API is lower level than DSL. It gives developers full control and allows defining custom processors and accessing data stores.
 
-Streams performs 1 record at a time processing operations enabling to do near real-time processing of data. It also offers exactly-once processing semantics to ensure processing result are correct even in case of failure from the Kafka cluster of Streams itself.
+Streams performs 1 record-at-a-time processing operations enabling to do near real-time processing of data. It also offers exactly-once processing semantics to ensure processing results are correct even in case of failure from the Kafka cluster of Streams itself.
 
-## Streams Operations
+## Processing Operations
 
 There are 2 types of processing operations:
 
@@ -30,14 +30,20 @@ A Streams application is a combination of processing operations linked together 
 
 One of the built-in sample Streams application is [WordCountDemo](https://github.com/apache/kafka/blob/2.5/streams/examples/src/main/java/org/apache/kafka/streams/examples/wordcount/WordCountDemo.java).
 
-This sample application consumes an input topic, count how many times words appear and write the result back into another topic
+This sample application consumes an input topic, counts how many times words appear and writes the results back into another topic
 
-Let's use `WordCountDemo` to count word in our topic `streams-plaintext-input`.
+Let's use `WordCountDemo` to count words in our topic `streams-plaintext-input`.
 
 ### Updating WordCountDemo
 
 Unfortunately, `WordCountDemo` is not currently configurable so we will need to make a few small code changes. In a text editor, open `streams/examples/src/main/java/org/apache/kafka/streams/examples/wordcount/WordCountDemo.java`:
 
+- Add the following imports after line 32:
+
+```java
+import java.io.FileInputStream;
+import java.io.IOException;
+```
 - Replace line 78 by `final Properties props = getStreamsConfig(args);`
 - Replace the `getStreamsConfig()` method from line 50 to 63 by the following block:
 
@@ -73,7 +79,7 @@ Once done, we need to recompile it. We can do that by running:
 
 ## Running WordCountDemo
 
-We start `WordCountDemo` passing our configuration file.
+We start `WordCountDemo` using `kafka-run-class.sh` tool and specify our configuration file.
 
 ```sh
 > bin/kafka-run-class.sh org.apache.kafka.streams.examples.wordcount.WordCountDemo ${CONFIG_FILE}
@@ -127,10 +133,10 @@ counts.toStream().to(OUTPUT_TOPIC, Produced.with(Serdes.String(), Serdes.Long())
 
 The first line defines the input stream. In this case, it is taking records from our input topic `streams-plaintext-input` and giving us a [KStream](http://kafka.apache.org/25/javadoc/org/apache/kafka/streams/kstream/KStream.html) instance. 
 
-The middle line performs the processing operations:
- - first for each record (which is a line in our input file), it is split by spaces to retrieve all the words
- - then words are grouped together by word
- - `count()` is applied to count how many times each word appear and emit a record `(word, count)` per word.
+The middle statement performs the processing operations. For each record (which is a line in our input file):
+ - first the record value is split by spaces to retrieve all the words
+ - then words are grouped together
+ - finally it counts how many times each word appear and emit a record `(word, count)` per word.
 
 The last line defines the output stream. Here we are sending it to our output topic `streams-wordcount-output` and we have to specify a serializer for both the key (words) and the value (current count).
 
