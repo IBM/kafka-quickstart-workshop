@@ -96,7 +96,7 @@ When we run the console consumer above, it consumed both partitions of our topic
 
 Now let's use the `kafka-consumer-groups.sh` tool to check the state of our group:
 ```sh
-> bin/kafka-consumer-groups.sh --bootstrap-server ${BOOSTRAP_SERVERS} \
+> bin/kafka-consumer-groups.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
   --command-config ${CONFIG_FILE} --describe --group my-group
 GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                              HOST            CLIENT-ID
 my-group        my-first-topic  0          1               1               0               consumer-my-group-1-a139ff8b-4e7d-40e4-8c81-660b629913d5 /169.254.0.3    consumer-my-group-1
