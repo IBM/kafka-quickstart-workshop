@@ -28,12 +28,12 @@ By default, the runtime exposes its REST API on port `8083`. You can change this
 
 Let's start the Connect runtime using the following command:
 ```sh
-./bin/connect-distributed.sh ./config/connect-distributed.properties
+> bin/connect-distributed.sh ./config/connect-distributed.properties
 ```
 
 We can validate the Connect runtime is correctly started by using its REST API. The following command returns the listed of available connectors:
 ```sh
-curl http://localhost:8083/connector-plugins
+> curl http://localhost:8083/connector-plugins
 ```
 
 Ensure it contains at least `org.apache.kafka.connect.file.FileStreamSourceConnector`.
@@ -97,7 +97,7 @@ Now that the connector is running, any line added to `/tmp/file-source.txt` will
 
 Start a consumer on `streams-plaintext-input`:
 ```sh
-./bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
+> bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
   --consumer.config ${CONFIG_FILE} --topic streams-plaintext-input --from-beginning
 ```
 

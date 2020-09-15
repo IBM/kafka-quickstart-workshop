@@ -89,7 +89,7 @@ A **consumer group** is a collection of consumers that cooperate to consume a se
 
 When we run the console consumer above, it consumed both partitions of our topic. If we started another instance, both would see all messages. We can configure the console consumer to use a Consumer Group using the `--group` flag. Let's restart a consumer with a group:
 
-```
+```sh
 > bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
   --consumer.config ${CONFIG_FILE} --topic my-first-topic --from-beginning --group my-group
 ```

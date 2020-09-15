@@ -29,10 +29,10 @@ In this workshop, we will use the Kafka command line tools.
 As we will need to edit a sample in [Part 4](../part4/README.md), let's [download](http://kafka.apache.org/downloads) the latest source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it and compile it. For example, for Kafka 2.6.0:
 
 ```sh
-tar -xzf kafka-2.6.0-src.tgz
-cd kafka-2.6.0-src
-gradle
-./gradlew assemble   # This command takes a few minutes to complete
+> tar -xzf kafka-2.6.0-src.tgz
+> cd kafka-2.6.0-src
+> gradle
+> ./gradlew assemble   # This command takes a few minutes to complete
 ```
 
 This workshop assumes you are running a Unix based platform like macOS or Linux and will use the scripts from the `bin` directory in the examples. If you are on Windows, use the scripts that are in the `bin/windows` directory.
