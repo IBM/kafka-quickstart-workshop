@@ -4,7 +4,7 @@
 
 [Apache Kafka](https://kafka.apache.org) is a distributed streaming platform. It provides publish-subscribe APIs and can store and process streams of records at large scale.
 
-Kafka is made of the following components:
+Kafka is made up of the following components:
 - Broker: One of more brokers form a Kafka cluster
 - Producer: Client to send records into Kafka
 - Consumer: Client to read records from Kafka
@@ -14,19 +14,20 @@ Kafka is made of the following components:
 
 ![Kafka Platform](./kafka-platform.png)
 
+You can learn more about Kafka in this introductory article, "[What is Apache Kafka](https://developer.ibm.com/articles/an-introduction-to-apache-kafka/)" or in this conference presentation, "[Introducing Apache Kafka](https://developer.ibm.com/videos/an-introduction-to-apache-kafka/)."
 
-## Prerequisites
+## Prerequisites for this workshop
 
-In order to complete this workshop, we need to have the following dependencies installed:
+In order to complete this workshop, you need to have the following dependencies installed:
 
-- [Java SDK](https://openjdk.java.net/install/). Version 8 or above
-- [gradle](https://gradle.org/install/). Version 6 or above
+- [Java SDK](https://openjdk.java.net/install/), Version 8 or above
+- [gradle](https://gradle.org/install/), Version 6 or above
 
-## Getting Apache Kafka
+## Downloading Apache Kafka
 
 In this workshop, we will use the Kafka command line tools.
 
-As we will need to edit a sample in [Part 4](../part4/README.md), let's [download](http://kafka.apache.org/downloads) the latest source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it and compile it. For example, for Kafka 2.6.0:
+[Download](http://kafka.apache.org/downloads) the latest source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it, and compile it. For example, for Kafka 2.6.0:
 
 ```sh
 > tar -xzf kafka-2.6.0-src.tgz
@@ -35,7 +36,7 @@ As we will need to edit a sample in [Part 4](../part4/README.md), let's [downloa
 > ./gradlew assemble   # This command takes a few minutes to complete
 ```
 
-This workshop assumes you are running a Unix based platform like macOS or Linux and will use the scripts from the `bin` directory in the examples. If you are on Windows, use the scripts that are in the `bin/windows` directory.
+This workshop assumes you are running a Unix-based platform like macOS or Linux and will use the scripts from the `bin` directory in the examples. If you are on Windows, use the scripts that are in the `bin/windows` directory.
 
 ## Kafka cluster
 
@@ -48,4 +49,4 @@ This workshop requires access to a Kafka cluster. If you don't already have a Ka
 
 ## Next Steps
 
-Continue to [Part 2](../part2/README.md)
+Continue to [Part 2](../part2/README.md).

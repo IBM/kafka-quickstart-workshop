@@ -1,6 +1,7 @@
 # Configuring Kafka Connect for Event Streams
 
 Create a file with the following contents, replacing the `<BOOTSTRAP_SERVERS>` and `<API_KEY>` tags with your cluster credentials.
+
 ```properties
 # connectivity settings for the runtime
 bootstrap.servers=<BOOTSTRAP_SERVERS>
@@ -42,4 +43,4 @@ status.storage.replication.factor=3
 
 ## Back to Part 3
 
-Return to [Part 3](../part3/README.md)
+Return to [Part 3](../part3/README.md).

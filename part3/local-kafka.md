@@ -1,6 +1,7 @@
 # Configuring Kafka Connect for Local Kafka cluster
 
 Create a file with the following contents:
+
 ```properties
 # connectivity settings for the runtime
 bootstrap.servers=localhost:9092,localhost:9192,localhost:9292
@@ -28,4 +29,4 @@ status.storage.replication.factor=3
 
 ## Back to Part 3
 
-Return to [Part 3](../part3/README.md)
+Return to [Part 3](../part3/README.md).
