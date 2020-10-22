@@ -27,11 +27,11 @@ In order to complete this workshop, you need to have the following dependencies 
 
 In this workshop, we will use the Kafka command line tools.
 
-[Download](http://kafka.apache.org/downloads) the latest source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it, and compile it. For example, for Kafka 2.6.0:
+[Download](http://kafka.apache.org/downloads) the 2.5.1 source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it, and compile it.
 
 ```sh
-> tar -xzf kafka-2.6.0-src.tgz
-> cd kafka-2.6.0-src
+> tar -xzf kafka-2.5.1-src.tgz
+> cd kafka-2.5.1-src
 > gradle
 > ./gradlew assemble   # This command takes a few minutes to complete
 ```
