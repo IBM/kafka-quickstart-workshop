@@ -9,7 +9,7 @@ The first step is to get ZooKeeper running. This is necessary in order to start 
 We can start ZooKeeper with the default configuration file, by running this command:
 
 ```sh
-./bin/zookeeper-server-start.sh ./config/zookeeper.properties
+C:\kafka_2.13-2.7.0>bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
 ```
 
 We have now started a ZooKeeper ensemble consisting of a single server. Again, this is not suitable for production but it is enough to start a Kafka cluster.
