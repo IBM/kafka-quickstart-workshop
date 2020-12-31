@@ -35,7 +35,8 @@ Kafka provides a default Kafka configuration file, `config/server.properties`. W
 
     - Replace line 21 with `broker.id=<BROKER_ID>`
     - Replace line 31 with `listeners=PLAINTEXT://:9<BROKER_ID>92`
-    - Replace line 60 with `log.dirs=/tmp/kafka<BROKER_ID>-logs` where `<BROKER_ID>` is the number in the file name, for example `2` for `config/server2.properties`.
+    - Replace line 60 with `log.dirs=/tmp/kafka<BROKER_ID>-logs` 
+    , where `<BROKER_ID>` is the number in the file name, for example `2` for `config/server2.properties`.
 
     For example, in `config/server2.properties`:
 
