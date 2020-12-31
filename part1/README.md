@@ -20,20 +20,17 @@ You can learn more about Kafka in this introductory article, "[What is Apache Ka
 
 In order to complete this workshop, you need to have the following dependencies installed:
 
-- [Java SDK](https://openjdk.java.net/install/), Version 8 or above
+- [Java SDK](https://jdk.java.net/java-se-ri/9), Version 9
 - [gradle](https://gradle.org/install/), Version 6 or above
 
 ## Downloading Apache Kafka
 
 In this workshop, we will use the Kafka command line tools.
 
-[Download](http://kafka.apache.org/downloads) the 2.13.2.7.0 source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it, and compile it.
+[Download](https://downloads.apache.org/kafka/2.7.0/kafka_2.13-2.7.0.tgz) the Binary downloads 2.13, uncompress it, and move the folder to drive c:
 
 ```sh
-> tar -xzf kafka-2.5.1-src.tgz
-> cd kafka-2.5.1-src
-> gradle
-> ./gradlew assemble   # This command takes a few minutes to complete
+C:\kafka_2.13-2.7.0
 ```
 
 This workshop assumes you are running a Unix-based platform like macOS or Linux and will use the scripts from the `bin` directory in the examples. If you are on Windows, use the scripts that are in the `bin/windows` directory.
