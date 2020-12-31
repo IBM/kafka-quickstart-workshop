@@ -27,7 +27,7 @@ In order to complete this workshop, you need to have the following dependencies 
 
 In this workshop, we will use the Kafka command line tools.
 
-[Download](http://kafka.apache.org/downloads) the 2.5.1 source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it, and compile it.
+[Download](http://kafka.apache.org/downloads) the 2.13.2.7.0 source package from the [Apache Kafka website](http://kafka.apache.org/), uncompress it, and compile it.
 
 ```sh
 > tar -xzf kafka-2.5.1-src.tgz
