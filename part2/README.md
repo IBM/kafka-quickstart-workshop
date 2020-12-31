@@ -34,8 +34,7 @@ Kafka comes with a command line **producer** that takes data from a file or from
 Run the producer, and then type a few messages into the console to send to the server.
 
 ```sh
-> bin/kafka-console-producer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --producer.config ${CONFIG_FILE} --topic my-first-topic
+C:\kafka_2.13-2.7.0>bin\windows\kafka-console-producer.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --topic my-first-topic
 > This is a message
 > This is another message
 ```
@@ -45,8 +44,7 @@ Run the producer, and then type a few messages into the console to send to the s
 Kafka also has a command line **consumer** that prints messages to standard output.
 
 ```sh
-> bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --consumer.config ${CONFIG_FILE} --topic my-first-topic --from-beginning
+C:\kafka_2.13-2.7.0>bin\windows\kafka-console-consumer.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --topic my-first-topic --from-beginning
 ```
 
 This is printed to the terminal:
