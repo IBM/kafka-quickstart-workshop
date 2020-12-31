@@ -44,7 +44,7 @@ Ensure it contains at least `org.apache.kafka.connect.file.FileStreamSourceConne
 
 Now that the runtime is running, we are able to start connectors by using the REST API.
 
-In order to start the connector, we need some configurations. Create a file, with the following content:
+In order to start the connector, we need some configurations. Create a file (c:\my_config\source1.json, with the following content:
 
 ```json
 {
@@ -52,20 +52,20 @@ In order to start the connector, we need some configurations. Create a file, wit
   "config": {
     "connector.class": "org.apache.kafka.connect.file.FileStreamSourceConnector",
     "tasks.max": "1",
-    "file": "/tmp/file-source.txt",
+     "file": "c:\\my_config\\file-source.txt",
     "topic": "streams-plaintext-input"
   }
 }
 ```
 
-This instructs the runtime to start the `FileStreamSourceConnector` connector and make it read a file called `/tmp/file-source.txt`. It will send each line of this file as a message to the `streams-plaintext-input` topic. Finally, `tasks.max` allows to configure how many tasks Kafka Connect should start, which is just 1 in our scenario.
+This instructs the runtime to start the `FileStreamSourceConnector` connector and make it read a file called `c:\\my_config\\file-source.txt`. It will send each line of this file as a message to the `streams-plaintext-input` topic. Finally, `tasks.max` allows to configure how many tasks Kafka Connect should start, which is just 1 in our scenario.
 
 ## Creating the topic
 
 To enable our connector to work, we need to create the `streams-plaintext-input` topic.
 
 ```sh
-C:\kafka_2.13-2.7.0>bin\windows\kafka-topics.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --command-config "c:\my_config\client.properties" --create --replication-factor 3 --partitions 1 --topic streams-plaintext-input
+C:\kafka_2.13-2.7.0>bin\windows\kafka-topics.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --create --replication-factor 3 --partitions 1 --topic streams-plaintext-input
 ```
 
 You should see this output:
@@ -79,8 +79,9 @@ Created topic streams-plaintext-input.
 We create the source file and put some content in it:
 
 ```sh
-> echo "first line of content" > /tmp/file-source.txt
-> echo "another line" >> /tmp/file-source.txt
+first line of content
+another line
+aaa
 ```
 
 ## Starting the connector
@@ -88,8 +89,7 @@ We create the source file and put some content in it:
 Let's start our connector:
 
 ```sh
-> curl -X POST -H "Content-Type: application/json" http://localhost:8083/connectors \
-  --data "@<CONNECTOR_CONFIG_FILE>"
+curl -d @"c:\my_config\source1.json" -H "Content-Type: application/json" -X POST http://localhost:8083/connectors
 ```
 
 Where `<CONNECTOR_CONFIG_FILE>` is the path of the JSON file we created above.
@@ -97,7 +97,7 @@ Where `<CONNECTOR_CONFIG_FILE>` is the path of the JSON file we created above.
 We can verify the connector is running:
 
 ```sh
-> curl http://localhost:8083/connectors/file-source/
+http://localhost:8083/connectors/file-source/
 ```
 
 ## Testing the connector
@@ -106,14 +106,19 @@ Now that the connector is running, any line added to `/tmp/file-source.txt` will
 
 Start a consumer on `streams-plaintext-input`:
 ```sh
-> bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --consumer.config ${CONFIG_FILE} --topic streams-plaintext-input --from-beginning
+C:\kafka_2.13-2.7.0>bin\windows\kafka-console-consumer.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --topic streams-plaintext-input --from-beginning
 ```
 
 While the consumer is running, we can add more lines to our file and they should be consumed immediately.
 
 ```sh
-> echo "adding more content" >> /tmp/file-source.txt
+first line of content
+another line
+aaa
+bbb
+ccc
+eee
+fff
 ```
 
 ## Summary
@@ -127,14 +132,6 @@ Kafka comes by default with a few connectors to integrate with:
 - Files: The [`FileStreamSourceConnector`](https://github.com/apache/kafka/blob/trunk/connect/file/src/main/java/org/apache/kafka/connect/file/FileStreamSourceConnector.java) and [`FileStreamSinkConnector`](https://github.com/apache/kafka/blob/trunk/connect/file/src/main/java/org/apache/kafka/connect/file/FileStreamSinkConnector.java) respectively enable to import and export data between files and Kafka.
 
 - Kafka: The [`MirrorSourceConnector`](https://github.com/apache/kafka/blob/trunk/connect/mirror/src/main/java/org/apache/kafka/connect/mirror/MirrorSourceConnector.java), [`MirrorCheckpointConnector`](https://github.com/apache/kafka/blob/trunk/connect/mirror/src/main/java/org/apache/kafka/connect/mirror/MirrorCheckpointConnector.java) and [`MirrorHeartbeatConnector`](https://github.com/apache/kafka/blob/trunk/connect/mirror/src/main/java/org/apache/kafka/connect/mirror/MirrorHeartbeatConnector.java) are known as [Mirror Maker 2](https://github.com/apache/kafka/tree/trunk/connect/mirror) and enable mirroring data between Kafka clusters. This can be used to set up disaster recovery environments, for example.
-
-IBM provides the following connectors:
-
-- [MQ Sink](https://github.com/ibm-messaging/kafka-connect-mq-sink)
-- [MQ Source](https://github.com/ibm-messaging/kafka-connect-mq-source)
-- [Cloud Object Storage Sink](https://github.com/ibm-messaging/kafka-connect-ibmcos-sink)
-
-We also provide a Docker image with a Kubernetes YAML file to easily deploy Kafka Connect in [IBM Kubernetes Service](https://www.ibm.com/cloud/container-service/) in the [Event Streams samples repository](https://github.com/ibm-messaging/event-streams-samples/tree/master/kafka-connect).
 
 ## Next Steps
 
