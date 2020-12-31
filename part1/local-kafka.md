@@ -71,27 +71,11 @@ The next step is to configure the Kafka command line tools to be able to connect
 
 1. The configuration file
 
-Create a new file that contains the following:
+Create a new file "c:\my_config\client.properties"  that contains the following:
 
 ```properties
 bootstrap.servers=localhost:9092,localhost:9192,localhost:9292
 replication.factor=3
-```
-
-Set an environment variable, `CONFIG_FILE`, pointing to the location of this file. For example:
-
-```sh
-set CONFIG_FILE="c:\my_config\client.properties"
-```
-
-2. Bootstrap Servers
-
-Set an environment variable, `BOOTSTRAP_SERVERS`, listing all your brokers.
-
-Set the environment variable like this:
-
-```sh
-set BOOTSTRAP_SERVERS="localhost:9092,localhost:9192,localhost:9292"
 ```
 
 ## Back to Part 1
