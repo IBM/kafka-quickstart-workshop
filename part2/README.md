@@ -14,16 +14,15 @@ A **topic** is a category or feed name to which records are published. To create
 Let's create our first topic. In a terminal, navigate to the Kafka directory downloaded in [pre-reqs](../part1/README.md), and then run the following command:
 
 ```sh
-> bin/kafka-topics.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --command-config ${CONFIG_FILE} --create --replication-factor 3 --partitions 2 --topic my-first-topic
+C:\kafka_2.13-2.7.0>bin\windows\kafka-topics.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --command-config "c:\my_config\client.properties" --create --replication-factor 3 --partitions 2 --topic my-first-topic
 ```
 
 You should see this output: `Created topic my-first-topic.`
 
 We can now see our topic if we run the list topics command:
 ```sh
-> bin/kafka-topics.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --command-config ${CONFIG_FILE} --list
+> bin/kafka-topics.sh --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" \
+  --command-config "c:\my_config\client.properties" --list
 ```
 
 You should see this output:  `my-first-topic`
