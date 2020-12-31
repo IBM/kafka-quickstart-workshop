@@ -29,13 +29,13 @@ By default, the runtime exposes its REST API on port `8083`. You can change this
 Let's start the Connect runtime using the following command:
 
 ```sh
-> bin/connect-distributed.sh ./config/connect-distributed.properties
+C:\kafka_2.13-2.7.0>bin\windows\connect-distributed.bat .\config\connect-distributed.properties
 ```
 
 We can validate that the Kafka Connect runtime is correctly started by using its REST API. The following command returns the listed of available connectors:
 
 ```sh
-> curl http://localhost:8083/connector-plugins
+http://localhost:8083/connector-plugins
 ```
 
 Ensure it contains at least `org.apache.kafka.connect.file.FileStreamSourceConnector`.
@@ -65,8 +65,7 @@ This instructs the runtime to start the `FileStreamSourceConnector` connector an
 To enable our connector to work, we need to create the `streams-plaintext-input` topic.
 
 ```sh
-> bin/kafka-topics.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --command-config ${CONFIG_FILE} --create --replication-factor 3 --partitions 1 --topic streams-plaintext-input
+C:\kafka_2.13-2.7.0>bin\windows\kafka-topics.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --command-config "c:\my_config\client.properties" --create --replication-factor 3 --partitions 1 --topic streams-plaintext-input
 ```
 
 You should see this output:
