@@ -49,18 +49,18 @@ Kafka provides a default Kafka configuration file, `config/server.properties`. W
 Now that we have all the required configurations, let's start our brokers:
 
 ```sh
-./bin/kafka-server-start.sh ./config/server0.properties
+C:\kafka_2.13-2.7.0>bin\windows\kafka-server-start.bat .\config\server0.properties
 ```
 
 Then in a different terminal window, run:
 
 ```sh
-./bin/kafka-server-start.sh ./config/server1.properties
+C:\kafka_2.13-2.7.0>bin\windows\kafka-server-start.bat .\config\server1.properties
 ```
 
 Finally in a different terminal window, run:
 ```sh
-./bin/kafka-server-start.sh ./config/server2.properties
+C:\kafka_2.13-2.7.0>bin\windows\kafka-server-start.bat .\config\server2.properties
 ```
 
 Congratulations, you've now started your Kafka cluster!
