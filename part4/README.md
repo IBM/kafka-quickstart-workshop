@@ -40,7 +40,7 @@ Unfortunately, `WordCountDemo` is not currently configurable so we will need to 
 
 1. In a text editor, open `streams/examples/src/main/java/org/apache/kafka/streams/examples/wordcount/WordCountDemo.java` and make these changes:
 
-    ```java
+```java
 
 package org.apache.kafka.streams.examples.wordcount;
 
@@ -134,7 +134,7 @@ public final class WordCountDemo {
     }
 }
 
-    ```
+```
 
 2. After making these updates done, we need to recompile it. You can do that by running:
 
@@ -147,7 +147,7 @@ public final class WordCountDemo {
 Start `WordCountDemo` by using `kafka-run-class.sh` and specify our configuration file.
 
 ```sh
-> bin\windows>kafka-run-class.bat org.apache.kafka.streams.examples.wordcount.WordCountDemo
+> bin\windows\kafka-run-class.bat org.apache.kafka.streams.examples.wordcount.WordCountDemo
 ```
 
 The Kafka Streams application will run until interrupted, such as by pressing `CTRL+C`.
