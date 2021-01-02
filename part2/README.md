@@ -67,8 +67,7 @@ When creating our topic, we used `3` as the replication factor. In Kafka, the re
 Let's describe our topic, to see the details about its replicas:
 
 ```sh
-> bin/kafka-topics.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --command-config ${CONFIG_FILE} --describe --topic my-first-topic
+> bin\windows\kafka-topics.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --describe --topic my-first-topic
 ```
 
 This is the output:
@@ -98,14 +97,12 @@ When we run the console consumer above, it consumed both partitions of our topic
 Let's restart a consumer with a group:
 
 ```sh
-> bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --consumer.config ${CONFIG_FILE} --topic my-first-topic --from-beginning --group my-group
+> bin\windows\kafka-console-consumer.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --topic my-first-topic --from-beginning --group my-group
 ```
 
 Now let's use the `kafka-consumer-groups.sh` tool to check the state of our group:
 ```sh
-> bin/kafka-consumer-groups.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --command-config ${CONFIG_FILE} --describe --group my-group
+> bin\windows\kafka-consumer-groups.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --describe --group my-group
 ```
 
 Here's the output:
@@ -122,8 +119,7 @@ We can see that we have a single consumer that is consuming from both partitions
 Let's now start a second consumer using the same group. In another window, run:
 
 ```sh
-> bin/kafka-console-consumer.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --consumer.config ${CONFIG_FILE} --topic my-first-topic --from-beginning --group my-group
+> bin\windows\kafka-console-consumer.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --topic my-first-topic --from-beginning --group my-group
 ```
 
 If we describe our group again, we now see:
@@ -149,8 +145,7 @@ As storage is not unlimited, retention limits can be specified to determine when
 Let's describe our topic again to check what these are:
 
 ```sh
-> bin/kafka-topics.sh --bootstrap-server ${BOOTSTRAP_SERVERS} \
-  --command-config ${CONFIG_FILE} --describe --topic my-first-topic
+> bin\windows\kafka-topics.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --describe --topic my-first-topic
 ```
 
 The output is:
