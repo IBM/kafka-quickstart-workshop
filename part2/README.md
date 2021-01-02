@@ -100,7 +100,7 @@ Let's restart a consumer with a group:
 > bin\windows\kafka-console-consumer.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --topic my-first-topic --from-beginning --group my-group
 ```
 
-Now let's use the `kafka-consumer-groups.sh` tool to check the state of our group:
+Now let's use the `kafka-consumer-groups.bat` tool to check the state of our group:
 ```sh
 > bin\windows\kafka-consumer-groups.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --describe --group my-group
 ```
@@ -133,7 +133,7 @@ Our consumers have split the partitions between them. If we start a third consum
 
 ### Offsets
 
-In addition, the `kafka-consumer-groups.sh` tool exposes the offsets last consumed by each consumer. This is useful to determine the health and state of consumers. It also shows the consumer lag which is the number of offsets between the current consumer position and the end of the partition. Ideally this value is small, which means consumers are near the end of partitions and processing recent records. If this value keeps increasing, it means consumers are not able to keep up with producers.
+In addition, the `kafka-consumer-groups.bat` tool exposes the offsets last consumed by each consumer. This is useful to determine the health and state of consumers. It also shows the consumer lag which is the number of offsets between the current consumer position and the end of the partition. Ideally this value is small, which means consumers are near the end of partitions and processing recent records. If this value keeps increasing, it means consumers are not able to keep up with producers.
 
 
 ## Data Retention
