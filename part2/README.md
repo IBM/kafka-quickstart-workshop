@@ -10,7 +10,8 @@ A **topic** is a category or feed name to which records are published. To create
     --partitions **Partition count:** Partitions are the units of scalability. Having multiple partitions allows you to distribute a topic across several brokers. Kafka only guarantees ordering within a partition.
     --replication-factor **Replication factor:** This specifies how many copies of the data are kept in the cluster. This value should not exceed the number of Kafka servers in the cluster. Let's set that to `3` for now.
     - **Configurations:** [Some configurations](https://kafka.apache.org/documentation/#topicconfigs) can be applied per topic. If not specified, the broker defaults are used.
-
+    - bootstrap.servers is a comma-separated list of host and port pairs that are the addresses of the Kafka brokers in a "bootstrap" Kafka cluster that a Kafka client connects to initially to bootstrap itself.
+    
 Let's create our first topic. In a terminal, run the following command:
 
 ```sh
