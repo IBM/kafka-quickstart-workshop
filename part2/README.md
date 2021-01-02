@@ -22,7 +22,7 @@ You should see this output: `Created topic my-first-topic.`
 
 We can now see our topic if we run the list topics command:
 ```sh
-> bin/kafka-topics.sh --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --list
+> bin\windows\kafka-topics.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --list
 ```
 
 You should see this output:  `my-first-topic`
