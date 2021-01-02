@@ -6,12 +6,12 @@ In this part, we will review the most basics Kafka concepts, and start out by se
 
 A **topic** is a category or feed name to which records are published. To create a topic we need 4 things:
 
-    - **Name:** A topic is referred by its name. It has to be unique within a cluster. Valid characters are alphanumerics plus a few symbols (`.`, `_` and `-`).
-    - **Partition count:** Partitions are the units of scalability. Having multiple partitions allows you to distribute a topic across several brokers. Kafka only guarantees ordering within a partition.
-    - **Replication factor:** This specifies how many copies of the data are kept in the cluster. This value should not exceed the number of Kafka servers in the cluster. Let's set that to `3` for now.
+    --topic **Name:** A topic is referred by its name. It has to be unique within a cluster. Valid characters are alphanumerics plus a few symbols (`.`, `_` and `-`).
+    --partitions **Partition count:** Partitions are the units of scalability. Having multiple partitions allows you to distribute a topic across several brokers. Kafka only guarantees ordering within a partition.
+    --replication-factor **Replication factor:** This specifies how many copies of the data are kept in the cluster. This value should not exceed the number of Kafka servers in the cluster. Let's set that to `3` for now.
     - **Configurations:** [Some configurations](https://kafka.apache.org/documentation/#topicconfigs) can be applied per topic. If not specified, the broker defaults are used.
 
-Let's create our first topic. In a terminal, navigate to the Kafka directory downloaded in [pre-reqs](../part1/README.md), and then run the following command:
+Let's create our first topic. In a terminal, run the following command:
 
 ```sh
 C:\kafka_2.13-2.7.0>bin\windows\kafka-topics.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --command-config "c:\my_config\client.properties" --create --replication-factor 3 --partitions 2 --topic my-first-topic
