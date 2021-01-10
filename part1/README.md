@@ -31,7 +31,7 @@ In this workshop, we will use the Kafka command line tools.
 
 ```sh
 > tar -xzf kafka-2.7.0-src.tgz
-> cd kafka-2.5.1-src
+> cd kafka-2.7.0-src
 > gradle
 > gradle assemble   # This command takes a few minutes to complete
 
