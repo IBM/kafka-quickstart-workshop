@@ -14,7 +14,10 @@ C:\kafka_2.13-2.7.0>bin\windows\zookeeper-server-start.bat .\config\zookeeper.pr
 
 We have now started a ZooKeeper ensemble consisting of a single server. Again, this is not suitable for production but it is enough to start a Kafka cluster.
 
+
 ## Configuring a local Kafka cluster
+
+
 
 Kafka provides a default Kafka configuration file, `config/server.properties`. We will reuse this file and make a few changes.
 
@@ -64,6 +67,8 @@ C:\kafka_2.13-2.7.0>bin\windows\kafka-server-start.bat .\config\server2.properti
 ```
 
 Congratulations, you've now started your Kafka cluster!
+
+Note that if a server is shutdown, try to delete all existing folders and files in "C:\tmp" and "C:\kafka_2.13-2.7.0\logs", and run again.
 
 ## Configuring the command line tools
 
