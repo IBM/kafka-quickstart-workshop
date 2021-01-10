@@ -27,15 +27,11 @@ In order to complete this workshop, you need to have the following dependencies 
 
 In this workshop, we will use the Kafka command line tools.
 
-[Download](https://www.apache.org/dyn/closer.cgi?path=/kafka/2.7.0/kafka-2.7.0-src.tgz) source package from the Apache Kafka website, uncompress it, and compile it.
+[Download](https://downloads.apache.org/kafka/2.7.0/kafka_2.13-2.7.0.tgz) source package from the Apache Kafka website, uncompress it.
 
 ```sh
-> tar -xzf kafka-2.7.0-src.tgz
-> cd kafka-2.7.0-src
-> gradle
-> gradle assemble   # This command takes a few minutes to complete
-
-//If gradle assemble does not work, try to run "gradle clean" and then "gradle assemble" again.
+> tar -xzf kafka-2.13-2.7.0.tgz
+> cd kafka-2.13-2.7.0
 ```
 
 This workshop assumes you are running a Unix-based platform like macOS or Linux and will use the scripts from the `bin` directory in the examples. If you are on Windows, use the scripts that are in the `bin/windows` directory.
