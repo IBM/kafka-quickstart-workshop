@@ -34,6 +34,8 @@ In this workshop, we will use the Kafka command line tools.
 > cd kafka-2.5.1-src
 > gradle
 > gradle assemble   # This command takes a few minutes to complete
+
+//If gradle assemble does not work, try to run "gradle clean" and then "gradle assemble" again.
 ```
 
 This workshop assumes you are running a Unix-based platform like macOS or Linux and will use the scripts from the `bin` directory in the examples. If you are on Windows, use the scripts that are in the `bin/windows` directory.
