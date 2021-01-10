@@ -139,7 +139,7 @@ public final class WordCountDemo {
 2. After making these updates done, we need to recompile it. You can do that by running:
 
 ```sh
-./gradlew assemble
+gradle assemble
 ```
 
 ### Running WordCountDemo
