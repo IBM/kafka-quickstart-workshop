@@ -33,7 +33,7 @@ In this workshop, we will use the Kafka command line tools.
 > tar -xzf kafka-2.7.0-src.tgz
 > cd kafka-2.5.1-src
 > gradle
-> ./gradlew assemble   # This command takes a few minutes to complete
+> gradle assemble   # This command takes a few minutes to complete
 ```
 
 This workshop assumes you are running a Unix-based platform like macOS or Linux and will use the scripts from the `bin` directory in the examples. If you are on Windows, use the scripts that are in the `bin/windows` directory.
@@ -41,8 +41,6 @@ This workshop assumes you are running a Unix-based platform like macOS or Linux 
 ## Kafka cluster
 
 This workshop requires access to a Kafka cluster. If you don't already have a Kafka cluster, you can use [IBM Event Streams](https://www.ibm.com/cloud/event-streams) or setup a Kafka cluster on your computer.
-
-- If you want to use IBM Event Streams, follow the [Event Streams setup](./event-streams.md) steps.
 
 - If you want to use a local Kafka cluster, follow the [local Kafka setup](./local-kafka.md) steps.
 
