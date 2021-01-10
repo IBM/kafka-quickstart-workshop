@@ -69,7 +69,7 @@ C:\kafka_2.13-2.7.0>bin\windows\kafka-server-start.bat .\config\server2.properti
 Congratulations, you've now started your Kafka cluster!
 
 ```html
-<b>Note that if a server is shutdown, </b>
+Note that if a server is shutdown,
 (1) close all terminals,
 (2) delete all existing folders and files in "C:\tmp" and "C:\kafka_2.13-2.7.0\logs", and 
 (3) run again.
