@@ -57,6 +57,7 @@ In order to start the connector, we need some configurations. Create a file (c:\
 }
 ```
 * tasks.max - The maximum number of tasks that the specified connector can use. Tasks enable the connector to perform work in parallel. The connector might create fewer tasks than specified.
+
 This instructs the runtime to start the `FileStreamSourceConnector` connector and make it read a file called `c:\\my_config\\file-source.txt`. It will send each line of this file as a message to the `streams-plaintext-input` topic. Finally, `tasks.max` allows to configure how many tasks Kafka Connect should start, which is just 1 in our scenario.
 
 ## Creating the topic
