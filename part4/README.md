@@ -197,8 +197,9 @@ The middle statement performs the processing operations. For each record (which 
 
 The last line defines the output stream. Here, we are sending it to our output topic `streams-wordcount-output` and we have to specify a serializer for both the key (words) and the value (current count).
 
+<!--
 The same logic is also implemented using the Processor API, see [WordCountProcessorDemo.java](https://github.com/apache/kafka/blob/trunk/streams/examples/src/main/java/org/apache/kafka/streams/examples/wordcount/WordCountProcessorDemo.java)
 
 ## Next Steps
 
-Continue to [workshop summary](../part4/summary.md).
+Continue to [workshop summary](../part4/summary.md).-->
