@@ -73,9 +73,9 @@ Let's describe our topic, to see the details about its replicas:
 This is the output:
 
 ```sh
-Topic: my-first-topic	PartitionCount: 2	ReplicationFactor: 3	Configs: min.insync.replicas=2,segment.bytes=536870912,retention.ms=86400000,retention.bytes=1073741824
-	Topic: my-first-topic	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3
-	Topic: my-first-topic	Partition: 1	Leader: 2	Replicas: 2,3,4	Isr: 2,3,4
+Topic: my-first-topic   PartitionCount: 2       ReplicationFactor: 3    Configs: segment.bytes=1073741824
+        Topic: my-first-topic   Partition: 0    Leader: 2       Replicas: 2,0,1 Isr: 2,0,1
+        Topic: my-first-topic   Partition: 1    Leader: 1       Replicas: 1,2,0 Isr: 1,2,0
 ```
 
 Here is an explanation of output:
