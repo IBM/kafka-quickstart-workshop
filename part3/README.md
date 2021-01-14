@@ -10,7 +10,7 @@ Kafka Connect can run in 2 modes:
 - **Standalone:** This mode is for development and runs in a single process.
 - **Distributed:** This mode is suitable for production environments as it allows scaling dynamically and provides fault tolerance.
 
-In this workshop, we will setup Kafka Connect using the distributed mode.
+In this workshop, we will setup Kafka Connect using the **distributed mode**.
 
 ## Importing data into Kafka from a file
 
