@@ -91,8 +91,6 @@ Let's start our connector:
 curl -d @"c:\my_config\source1.json" -H "Content-Type: application/json" -X POST http://localhost:8083/connectors
 ```
 
-Where `<CONNECTOR_CONFIG_FILE>` is the path of the JSON file we created above.
-
 We can verify the connector is running:
 
 ```sh
