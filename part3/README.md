@@ -99,7 +99,7 @@ http://localhost:8083/connectors/file-source/
 
 ## Testing the connector
 
-Now that the connector is running, any line added to `/tmp/file-source.txt` will end up in our topic.
+Now that the connector is running, any line added to `C:\my_config\file-source.txt` will end up in our topic.
 
 Start a consumer on `streams-plaintext-input`:
 ```sh
