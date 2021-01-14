@@ -50,7 +50,7 @@ In order to start the connector, we need some configurations. Create a file (c:\
   "name": "file-source",
   "config": {
     "connector.class": "org.apache.kafka.connect.file.FileStreamSourceConnector",
-    "tasks.max": "1",
+    "tasks.max": "2",
      "file": "c:\\my_config\\file-source.txt",
     "topic": "streams-plaintext-input"
   }
