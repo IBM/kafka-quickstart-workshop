@@ -9,7 +9,7 @@ In this workshop, we will build a small event streaming pipeline using the built
 ![Workshop pipeline](./pipeline.png)
 
 The data flow in our sample pipeline includes:
-- Our input data comes from a file: `/tmp/file-source.txt`.
+- Our input data comes from a file: `C:\my_config\file-source.txt`.
 - As new lines are added to this file, Kafka Connect streams them into a topic, `streams-plaintext-input`, in Kafka.
 - A Kafka Streams application processes records from `streams-plaintext-input` in real time and writes the computed output into a new topic, `streams-wordcount-output`.
 
