@@ -144,7 +144,7 @@ gradle assemble
 
 ### Running WordCountDemo
 
-Start `WordCountDemo` by using `kafka-run-class.sh` and specify our configuration file.
+Start `WordCountDemo` by using `kafka-run-class.bat` and specify our configuration file.
 
 ```sh
 > bin\windows\kafka-run-class.bat org.apache.kafka.streams.examples.wordcount.WordCountDemo
