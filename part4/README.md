@@ -162,11 +162,7 @@ By default, `WordCountDemo` writes its output in the `streams-wordcount-output` 
 
 While the Kafka Streams application is running, you can keep adding lines to our file and see new counts being emitted.
 
-```sh
-> echo "another line" >> /tmp/file-source.txt
-```
-
-You can also use a producer to directly write records into the input topic:
+(Option) You can also use a producer to directly write records into the input topic:
 
 ```sh
 bin\windows\kafka-console-producer.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --topic streams-plaintext-input
