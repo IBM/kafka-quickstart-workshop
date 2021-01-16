@@ -76,7 +76,7 @@ Created topic streams-plaintext-input.
 
 ## Creating and populating the source file
 
-We create the source file and put some content in it:
+We create the source file (c:\\my_config\\file-source.txt) and put some content in it:
 
 ```sh
 first line of content
