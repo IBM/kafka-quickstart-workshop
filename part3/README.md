@@ -91,6 +91,7 @@ Let's start our connector:
 ```sh
 curl -d @"c:\my_config\source1.json" -H "Content-Type: application/json" -X POST http://localhost:8083/connectors
 ```
+If success, the output is {"name":"file-source","config":{"connector.class":"org.apache.kafka.connect.file.FileStreamSourceConnector","tasks.max":"1","file":"c:\\my_config\\file-source.txt","topic":"streams-plaintext-input","name":"file-source"},"tasks":[],"type":"source"}
 
 We can verify the connector is running:
 
