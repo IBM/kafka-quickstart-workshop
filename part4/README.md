@@ -145,16 +145,6 @@ public final class WordCountDemo {
 gradle assemble -x clients:javadoc streams:test-utils:javadoc streams:streams-scala:scaladoc connect:mirror-client:javadoc connect:api:javadoc core:javadoc core:compileScala
 ```
 
-### Running WordCountDemo
-
-Start `WordCountDemo` by using `kafka-run-class.bat` and specify our configuration file.
-
-```sh
-> bin\windows\kafka-run-class.bat org.apache.kafka.streams.examples.wordcount.WordCountDemo
-```
-
-The Kafka Streams application will run until interrupted, such as by pressing `CTRL+C`.
-
 ### Checking the result
 
 By default, `WordCountDemo` writes its output in the `streams-wordcount-output` topic. We can use a consumer to check the result:
@@ -170,6 +160,16 @@ While the Kafka Streams application is running, you can keep adding lines to our
 ```sh
 bin\windows\kafka-console-producer.bat --bootstrap-server "localhost:9092,localhost:9192,localhost:9292" --topic streams-plaintext-input
 ```
+
+### Running WordCountDemo
+
+Start `WordCountDemo` by using `kafka-run-class.bat` and specify our configuration file.
+
+```sh
+> bin\windows\kafka-run-class.bat org.apache.kafka.streams.examples.wordcount.WordCountDemo
+```
+
+The Kafka Streams application will run until interrupted, such as by pressing `CTRL+C`.
 
 ### Looking at the code
 
