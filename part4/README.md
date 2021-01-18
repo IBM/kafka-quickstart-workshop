@@ -145,6 +145,14 @@ public final class WordCountDemo {
 gradle assemble -x clients:javadoc streams:test-utils:javadoc streams:streams-scala:scaladoc connect:mirror-client:javadoc connect:api:javadoc core:javadoc core:compileScala
 ```
 
+### After finishing gradle assemble
+```sh
+Copy kafka-streams-examples-2.7.0.jar from 
+C:\src\kafka-2.7.0-src\streams\examples\build\libs
+and replace the existing one at 
+C:\kafka_2.13-2.7.0\libs
+```
+
 ### Checking the result
 
 By default, `WordCountDemo` writes its output in the `streams-wordcount-output` topic. We can use a consumer to check the result:
