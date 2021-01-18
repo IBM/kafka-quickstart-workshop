@@ -140,6 +140,9 @@ public final class WordCountDemo {
 
 ```sh
 gradle assemble
+
+fast and furious version: (4 secs on my pc)
+gradle assemble -x clients:javadoc streams:test-utils:javadoc streams:streams-scala:scaladoc connect:mirror-client:javadoc connect:api:javadoc core:javadoc core:compileScala
 ```
 
 ### Running WordCountDemo
