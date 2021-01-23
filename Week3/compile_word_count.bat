@@ -8,4 +8,4 @@ COPY "C:\src\kafka-2.7.0-src\streams\examples\build\libs\kafka-streams-examples-
 
 cd C:\kafka_2.13-2.7.0
 
-start cmd.exe /k "C:\kafka_2.13-2.7.0\bin\windows\kafka-run-class.bat org.apache.kafka.streams.examples.wordcount.WordCountDemo"
+start cmd.exe /k "bin\windows\kafka-run-class.bat org.apache.kafka.streams.examples.wordcount.WordCountDemo"
