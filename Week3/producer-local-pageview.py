@@ -11,18 +11,22 @@ def delivery_report(err, msg):
     else:
         print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
 
-file1 = open('myfile.txt', 'r') 
-Lines = file1.readlines()
-for data in Lines:
-    # Trigger any available delivery report callbacks from previous produce() calls
-    p.poll(0)
 
-    # Asynchronously produce a message, the delivery report callback
-    # will be triggered from poll() above, or flush() below, when the message has
-    # been successfully delivered or failed permanently.
-    
-    p.produce('streams-plaintext-input', data.encode('utf-8'), callback=delivery_report)
-    time.sleep(1)
+key = 'user'
+r1 = {"_t": "pv", key:"2", "page":"22", "timestamp":1435278177777}
+r2 = {"_t": "up", "region":"CA","timestamp":1435278177777} 
+
+import json
+
+# Trigger any available delivery report callbacks from previous produce() calls
+p.poll(0)
+
+p.produce('streams-pageview-input', key=r1[key], value=json.dumps(r1))
+
+time.sleep(2)
+
+p.produce('streams-userprofile-input', key=r1[key], value=json.dumps(r2))
+time.sleep(2)
 
 # Wait for any outstanding messages to be delivered and delivery report
 # callbacks to be triggered.

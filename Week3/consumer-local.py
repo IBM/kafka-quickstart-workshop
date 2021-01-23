@@ -6,7 +6,7 @@ c = Consumer({
     'auto.offset.reset': 'earliest'
 })
 
-c.subscribe(['streams-wordcount-output'])
+c.subscribe(['streams-pageviewstats-typed-output'])
 
 while True:
     msg = c.poll(1.0)
