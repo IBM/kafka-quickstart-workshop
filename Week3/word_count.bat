@@ -1,3 +1,4 @@
+cd C:\src\kafka-2.7.0-src
 
 START /b /wait cmd /C "gradle assemble -x clients:javadoc streams:test-utils:javadoc streams:streams-scala:scaladoc connect:mirror-client:javadoc connect:api:javadoc core:javadoc core:compileScala"
 
