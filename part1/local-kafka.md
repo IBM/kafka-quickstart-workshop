@@ -12,10 +12,10 @@ We can start ZooKeeper with the default configuration file, by running this comm
 ./bin/zookeeper-server-start.sh ./config/zookeeper.properties
 ```
 
-**NOTE:** If you're working on Windows with `bash`, before executing the above command you should edit `config/zookeeper.properties` in order to indicate the absolute path in Windows format for the *dataDir* — usually is used the default temp folder. For example:
+**NOTE:** If you're working on Windows with `bash`, before executing the above command you should edit `config/zookeeper.properties` in order to indicate the absolute path in Windows format for the *dataDir*. For example:
 
 ```properties
-dataDir=C:\\Users\\<username>\\AppData\\Local\\Temp
+dataDir=C:\\Users\\<username>\\AppData\\Local\\Temp\\zookeeper
 ```
 
 We have now started a ZooKeeper ensemble consisting of a single server. Again, this is not suitable for production but it is enough to start a Kafka cluster.
